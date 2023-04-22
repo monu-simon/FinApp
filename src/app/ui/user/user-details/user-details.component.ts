@@ -13,8 +13,7 @@ export class UserDetailsComponent implements OnInit {
   name:string='sd';
   ngOnInit (): void {
     this.user$.subscribe(res => {
-      console.log(res)
-      this.name = res.displayName;
+     
     })
   }
 }
