@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
+import { AngularFireAuth } from '@angular/fire/compat/auth'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-user-details',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-details.component.css']
 })
 export class UserDetailsComponent implements OnInit {
+  user$!: Observable<any>
+  constructor (public afAuth: AngularFireAuth) {this.user$ = this.afAuth.user}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit (): void {
+    this.user$.subscribe(res => {
+      console.log(res)
+    })
   }
-
 }
