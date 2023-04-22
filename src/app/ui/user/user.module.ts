@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { PlotComponent } from './plot/plot.component';
 
 const routes:Routes = [
   { path: 'details', component: UserDetailsComponent },
@@ -11,7 +12,8 @@ const routes:Routes = [
 
 @NgModule({
   declarations: [
-    UserDetailsComponent
+    UserDetailsComponent,
+    PlotComponent
   ],
   imports: [
     CommonModule, 
@@ -19,7 +21,8 @@ const routes:Routes = [
     FormsModule
   ],
   exports: [
-    RouterModule
+    RouterModule,
+    PlotComponent
   ]
 })
 export class UserModule { }
