@@ -10,10 +10,11 @@ import { Observable } from 'rxjs'
 export class UserDetailsComponent implements OnInit {
   user$!: Observable<any>
   constructor (public afAuth: AngularFireAuth) {this.user$ = this.afAuth.user}
-  name!:string;
+  name:string='sd';
   ngOnInit (): void {
     this.user$.subscribe(res => {
       console.log(res)
+      this.name = res.displayName;
     })
   }
 }
