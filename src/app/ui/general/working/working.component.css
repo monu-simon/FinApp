@@ -1,0 +1,14 @@
+.container {
+    margin-top: 10px;
+}
+.sub-heading {
+    color: orange;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.daily {
+    font-weight: bolder;
+    line-height: 1.2;
+    font-size: 2rem;
+}
