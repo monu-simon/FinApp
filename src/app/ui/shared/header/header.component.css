@@ -19,5 +19,6 @@ a{
 
 .active {
     color: white;
-    background-color: green;
+    color: green;
+    font-weight: 900;
 }
