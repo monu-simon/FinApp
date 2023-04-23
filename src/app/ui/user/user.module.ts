@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PlotComponent } from './plot/plot.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { OverviewComponent } from './overview/overview.component';
 
 const routes:Routes = [
   {path: 'dashboard', component: DashboardComponent},
@@ -16,7 +17,8 @@ const routes:Routes = [
   declarations: [
     UserDetailsComponent,
     PlotComponent,
-    DashboardComponent
+    DashboardComponent,
+    OverviewComponent
   ],
   imports: [
     CommonModule, 
