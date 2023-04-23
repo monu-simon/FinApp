@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core'
 import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { AuthService } from './auth.service'
 import { AngularFireAuth } from '@angular/fire/compat/auth'
+import firebase from 'firebase/compat/app';
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +21,19 @@ export class CalculateService {
     date: string,
     amount: any
   ) {
+    const initialExpenseEntry = {
+      amount: amount,
+      utility: 'Testing'
+    };
+    const initialExpenseEntries = [{
+      date: date,
+      amount: [initialExpenseEntry]
+    }];
     this.firestore
       .collection('expenses')
       .doc(userId)
       .set({
-        date: date,
-        amount: amount
+        expenses: initialExpenseEntries
       })
       .catch(err => {
         console.log('error creating data')
@@ -49,7 +57,7 @@ export class CalculateService {
         const date = expensesData.date
         const expenses = expensesData.amount
 
-        return { date, expenses }
+        return { expensesData}
       } else {
         console.log('No expenses data found')
         return null
@@ -77,6 +85,29 @@ export class CalculateService {
       console.error('Error checking if expense entry exists:', error);
       return false;
     }
+  }
+
+  update(userId:string | undefined,total:number,date:string) {
+    const initialExpenseEntry = {
+      amount: total,
+      utility: 'General Bill'
+    };
+    const updateEntries = {
+      date: date,
+      amount: [initialExpenseEntry]
+    };
+    const newValue = {
+      total: 200,
+      utility: 'General bill'
+    };
+    this.firestore.collection('expenses').doc(userId).update({
+      expenses: firebase.firestore.FieldValue.arrayUnion(updateEntries)
+    }).then(() => {
+      console.log('New value added successfully');
+    })
+    .catch((error) => {
+      console.error('Error adding new value:', error);
+    });
   }
 
 }

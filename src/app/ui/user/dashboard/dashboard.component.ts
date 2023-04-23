@@ -11,7 +11,7 @@ export class DashboardComponent implements OnInit {
   userId!: string | undefined
   currentDate!: string
   amount!: number
-  response: any;
+  response: any
 
   constructor (
     private afAuth: AngularFireAuth,
@@ -23,7 +23,7 @@ export class DashboardComponent implements OnInit {
       this.userId = res?.uid
       //this.calculateService.createInitialExpenseEntry(this.userId,this.calculateService.getCurrentDate(),100);
       this.calculateService.getExpensesData(this.userId).then(res => {
-        this.response = res;
+        this.response = res
       })
       this.calculateService
         .isExpenseEntryExists(this.userId)
@@ -33,11 +33,20 @@ export class DashboardComponent implements OnInit {
   }
 
   create () {
-    console.log(this.amount);
-    this.afAuth.user.subscribe(res => {
-      this.userId = res?.uid;
-      this.calculateService.createInitialExpenseEntry(this.userId,this.calculateService.getCurrentDate(),this.amount);
+    console.log(this.amount)
+    this.calculateService.isExpenseEntryExists(this.userId).then(res => {
+      if (res) {
+        this.calculateService.update(this.userId,this.amount,this.calculateService.getCurrentDate());
+      } else {
+        this.afAuth.user.subscribe(res => {
+          this.userId = res?.uid
+          this.calculateService.createInitialExpenseEntry(
+            this.userId,
+            this.calculateService.getCurrentDate(),
+            this.amount
+          )
+        })
+      }
     })
-    
   }
 }
