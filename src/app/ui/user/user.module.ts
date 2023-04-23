@@ -4,8 +4,10 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { PlotComponent } from './plot/plot.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes:Routes = [
+  {path: 'dashboard', component: DashboardComponent},
   { path: 'details', component: UserDetailsComponent },
 
 ]
@@ -13,7 +15,8 @@ const routes:Routes = [
 @NgModule({
   declarations: [
     UserDetailsComponent,
-    PlotComponent
+    PlotComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule, 
