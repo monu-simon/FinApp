@@ -1,13 +1,6 @@
-<div class="container d-flex flex-column align-items-center justify-content-center" *ngFor="let expense of expenses">
-    <h2>{{ expense.date }}</h2>
-    <div *ngFor="let item of expense.amount">
-      <p>{{ item.utility }} - {{ item.amount }}</p>
-    </div>
+<div *ngFor="let date of custom | keyvalue">
+  <h2>{{date.key}}</h2>
+  <div *ngFor="let uti of custom[date.key]">
+    <p>{{ uti.utility }} - {{ uti.amount }}</p>
   </div>
-  <!-- <div *ngFor="let date of custom | keyvalue">
-    <h2>{{date.key}}</h2>
-    {{date.value | json}}
-    <div *ngFor="let uti of (date.value | json)">
-      <p>asdf</p>
-    </div>
-  </div> -->
+</div>
