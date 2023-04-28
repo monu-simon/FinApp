@@ -27,7 +27,8 @@ export class ViewComponent implements OnInit {
     private afAuth: AngularFireAuth
   ) {}
   userId!: string | undefined
-  expenses: any
+  expenses: any;
+  total:any;
   //custom: any = {}
   custom: ReducedData = {}
   ngOnInit (): void {
@@ -38,6 +39,11 @@ export class ViewComponent implements OnInit {
       this.calculate.getExpensesData(this.userId).then(res => {
         this.expenses = res?.expensesData.expenses
         console.log(this.expenses)
+        this.total= this.expenses.reduce((accumulator:any, currentValue:any) => {
+          const amounts = currentValue.amount.map((obj:any) => obj.amount); // Extract amounts array
+          const sum = amounts.reduce((a:any, b:any) => a + b, 0); // Compute total amount
+          return accumulator + sum; // Accumulate total amount
+        }, 0);
         this.loading.stopLoading()
 
         for (const item of this.expenses) {

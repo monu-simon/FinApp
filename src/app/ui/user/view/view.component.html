@@ -4,15 +4,19 @@
     <p>{{ uti.utility }} - {{ uti.amount }}</p>
   </div>
 </div> -->
+<div class="card bg-success m-2">
+  <div class="card-body text-center">
+    <h5 class="card-title text-white">Total Expense</h5>
+    <p class="card-text text-white display-4">{{total}}</p>
+  </div>
+</div>
 
 <div *ngFor="let date of custom | keyvalue" class="container">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <h2>{{date.key}}</h2>
     </div>
-    <div class="col-md-6">
-      <p>Total</p>
-    </div>
+    
   </div>
   <table class="table">
     <thead>
