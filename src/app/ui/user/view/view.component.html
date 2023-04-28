@@ -1,0 +1,6 @@
+<div class="container d-flex flex-column align-items-center justify-content-center" *ngFor="let expense of expenses">
+    <h2>{{ expense.date }}</h2>
+    <div *ngFor="let item of expense.amount">
+      <p>{{ item.utility }} - {{ item.amount }}</p>
+    </div>
+  </div>

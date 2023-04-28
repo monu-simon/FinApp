@@ -28,7 +28,7 @@ export class CalculateService {
     };
     const initialExpenseEntries = [{
       date: date,
-      amount: initialExpenseEntry
+      amount: [initialExpenseEntry]
     }];
     this.firestore
       .collection('expenses')
@@ -91,7 +91,7 @@ export class CalculateService {
   update(userId:string | undefined,total:number,date:string,utilityType:string) {
     const initialExpenseEntry = {
       amount: total,
-      utility: 'General Bill'
+      utility: utilityType
     };
     const updateEntries = {
       date: date,
@@ -99,7 +99,7 @@ export class CalculateService {
     };
     const newValue = {
       total: 200,
-      utility: 'General bill'
+      utility: utilityType
     };
     this.firestore.collection('expenses').doc(userId).update({
       expenses: firebase.firestore.FieldValue.arrayUnion(updateEntries)
