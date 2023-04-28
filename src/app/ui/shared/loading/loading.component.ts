@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoadingService } from 'src/app/service/loading.service';
 
 @Component({
   selector: 'app-loading',
@@ -7,11 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoadingComponent implements OnInit {
 
-  constructor() { }
+  status:boolean = false;
+  constructor(
+    public loading:LoadingService
+  ) { }
 
-  showLoadingScreen = true;
+  showLoadingScreen = false;
 
   ngOnInit() {
+
+    this.loading.loadingStatus.subscribe(res => {
+      this.status = res
+    })
     
   }
 
