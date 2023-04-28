@@ -49,6 +49,7 @@ export class ViewComponent implements OnInit {
             this.custom[date] = amount
           }
         }
+        console.log(this.custom)
       })
     })
   }
