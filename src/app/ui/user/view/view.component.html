@@ -1,6 +1,31 @@
-<div *ngFor="let date of custom | keyvalue">
+<!-- <div *ngFor="let date of custom | keyvalue">
   <h2>{{date.key}}</h2>
   <div *ngFor="let uti of custom[date.key]">
     <p>{{ uti.utility }} - {{ uti.amount }}</p>
   </div>
+</div> -->
+
+<div *ngFor="let date of custom | keyvalue" class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>{{date.key}}</h2>
+    </div>
+    <div class="col-md-6">
+      <p>Total</p>
+    </div>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Utility Type</th>
+        <th>Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let uti of custom[date.key]">
+        <td>{{ uti.utility }}</td>
+        <td>{{ uti.amount }}</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
