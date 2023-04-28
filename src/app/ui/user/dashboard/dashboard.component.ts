@@ -25,11 +25,11 @@ export class DashboardComponent implements OnInit {
     this.afAuth.user.subscribe(res => {
       this.userId = res?.uid
       //this.calculateService.createInitialExpenseEntry(this.userId,this.calculateService.getCurrentDate(),100);
-      this.loading.showLoading();
-      this.calculateService.getExpensesData(this.userId).then(res => {
-        this.response = res;
-        this.loading.stopLoading();
-      })
+      // this.loading.showLoading();
+      // this.calculateService.getExpensesData(this.userId).then(res => {
+      //   this.response = res;
+      //   this.loading.stopLoading();
+      // })
     })
   }
 
