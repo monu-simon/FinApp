@@ -19,15 +19,16 @@ export class CalculateService {
   createInitialExpenseEntry (
     userId: string | undefined,
     date: string,
-    amount: any
+    amount: any,
+    utilityType:string
   ) {
     const initialExpenseEntry = {
       amount: amount,
-      utility: 'Testing'
+      utility: utilityType
     };
     const initialExpenseEntries = [{
       date: date,
-      amount: [initialExpenseEntry]
+      amount: initialExpenseEntry
     }];
     this.firestore
       .collection('expenses')
@@ -87,7 +88,7 @@ export class CalculateService {
     }
   }
 
-  update(userId:string | undefined,total:number,date:string) {
+  update(userId:string | undefined,total:number,date:string,utilityType:string) {
     const initialExpenseEntry = {
       amount: total,
       utility: 'General Bill'

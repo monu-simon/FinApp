@@ -11,6 +11,7 @@ export class DashboardComponent implements OnInit {
   userId!: string | undefined
   currentDate!: string
   amount!: number
+  utilityType!:string;
   response: any
 
   constructor (
@@ -25,25 +26,26 @@ export class DashboardComponent implements OnInit {
       this.calculateService.getExpensesData(this.userId).then(res => {
         this.response = res
       })
-      this.calculateService
-        .isExpenseEntryExists(this.userId)
-        .then(res => console.log(res))
     })
-    console.log(this.calculateService.getCurrentDate())
   }
 
   create () {
-    console.log(this.amount)
     this.calculateService.isExpenseEntryExists(this.userId).then(res => {
       if (res) {
-        this.calculateService.update(this.userId,this.amount,this.calculateService.getCurrentDate());
+        this.calculateService.update(
+          this.userId,
+          this.amount,
+          this.calculateService.getCurrentDate(),
+          this.utilityType
+        )
       } else {
         this.afAuth.user.subscribe(res => {
           this.userId = res?.uid
           this.calculateService.createInitialExpenseEntry(
             this.userId,
             this.calculateService.getCurrentDate(),
-            this.amount
+            this.amount,
+            this.utilityType
           )
         })
       }
