@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { CalculateService } from 'src/app/service/calculate.service'
 import { AngularFireAuth } from '@angular/fire/compat/auth'
+import { LoadingService } from 'src/app/service/loading.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -16,20 +17,24 @@ export class DashboardComponent implements OnInit {
 
   constructor (
     private afAuth: AngularFireAuth,
-    private calculateService: CalculateService
+    private calculateService: CalculateService,
+    private loading: LoadingService
   ) {}
 
   ngOnInit (): void {
     this.afAuth.user.subscribe(res => {
       this.userId = res?.uid
       //this.calculateService.createInitialExpenseEntry(this.userId,this.calculateService.getCurrentDate(),100);
+      this.loading.showLoading();
       this.calculateService.getExpensesData(this.userId).then(res => {
-        this.response = res
+        this.response = res;
+        this.loading.stopLoading();
       })
     })
   }
 
   create () {
+    this.loading.showLoading();
     this.calculateService.isExpenseEntryExists(this.userId).then(res => {
       if (res) {
         this.calculateService.update(
@@ -38,6 +43,7 @@ export class DashboardComponent implements OnInit {
           this.calculateService.getCurrentDate(),
           this.utilityType
         )
+        this.loading.stopLoading();
       } else {
         this.afAuth.user.subscribe(res => {
           this.userId = res?.uid
@@ -47,6 +53,7 @@ export class DashboardComponent implements OnInit {
             this.amount,
             this.utilityType
           )
+          this.loading.stopLoading();
         })
       }
     })
